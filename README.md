@@ -1,0 +1,1 @@
+Upload semua isi folder ke repository GitHub lalu aktifkan Pages.
