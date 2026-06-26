@@ -39,7 +39,9 @@ html = """<!DOCTYPE html>
 <a class="btn" href="#">Buka Form</a>
 </section>
 
-<footer>© Fun Run Wanayasa 2026</footer>
+<footer>©
+  <p>&copy; Fun Run Wanayasa 2026</p>
+</footer>
 </body>
 </html>
 """
