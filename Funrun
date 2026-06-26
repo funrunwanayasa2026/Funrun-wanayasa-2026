@@ -16,7 +16,7 @@ html = """<!DOCTYPE html>
 <body>
 <header class="hero">
 <div class="overlay">
-<img class="logo" src="assets/logo.png" alt="Fun Run Wanayasa">
+<img class="logo" src="assets/logo-funrun.png" alt="Fun Run Wanayasa">
 <h1>FUN RUN WANAYASA 2026</h1>
 <p>Semarak HUT RI Ke-81 • Bersatu • Berlari • Berprestasi</p>
 <a class="btn" href="#daftar">Daftar Sekarang</a>
