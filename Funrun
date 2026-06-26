@@ -1,0 +1,85 @@
+from pathlib import Path
+from zipfile import ZipFile
+import textwrap
+
+base = Path("/mnt/data/funrun_wanayasa_website")
+base.mkdir(parents=True, exist_ok=True)
+
+html = """<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fun Run Wanayasa 2026</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="hero">
+<div class="overlay">
+<img class="logo" src="assets/logo.png" alt="Fun Run Wanayasa">
+<h1>FUN RUN WANAYASA 2026</h1>
+<p>Semarak HUT RI Ke-81 • Bersatu • Berlari • Berprestasi</p>
+<a class="btn" href="#daftar">Daftar Sekarang</a>
+</div>
+</header>
+
+<section class="card">
+<h2>Tentang Event</h2>
+<p>Fun Run Wanayasa 2026 dalam rangka semarak HUT RI.</p>
+</section>
+
+<section class="paket">
+<div><h3>Paket 1 — 60K</h3><p>Medali • BIB • Air Mineral • Isotonik</p></div>
+<div><h3>Paket 2 — 125K</h3><p>Jersey • Medali • BIB • Air Mineral • Isotonik</p></div>
+</section>
+
+<section id="daftar" class="card">
+<h2>Pendaftaran</h2>
+<p>Tempel link Google Form di tombol bawah.</p>
+<a class="btn" href="#">Buka Form</a>
+</section>
+
+<footer>© Fun Run Wanayasa 2026</footer>
+</body>
+</html>
+"""
+
+css = """
+body{margin:0;background:#070707;color:#fff;font-family:Arial}
+.hero{min-height:70vh;background:linear-gradient(135deg,#000,#2b2100);display:flex}
+.overlay{margin:auto;text-align:center;padding:30px}
+.logo{width:220px;max-width:80%}
+h1{color:#f0c247}
+.btn{display:inline-block;background:#d9a600;color:#000;padding:14px 24px;border-radius:12px;text-decoration:none;font-weight:700}
+.card,.paket{padding:30px;max-width:900px;margin:auto}
+.paket{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.paket div,.card{background:#111;border:1px solid #c99a00;border-radius:16px}
+footer{text-align:center;padding:30px}
+"""
+
+readme = textwrap.dedent("""
+# Fun Run Wanayasa 2026
+
+1. Upload semua file ke GitHub repository
+2. Settings → Pages
+3. Deploy from branch → main → /(root)
+4. Save
+""")
+
+(base/"index.html").write_text(html, encoding="utf-8")
+(base/"style.css").write_text(css, encoding="utf-8")
+(base/"README.md").write_text(readme, encoding="utf-8")
+
+assets = base/"assets"
+assets.mkdir(exist_ok=True)
+
+# placeholder logo
+png = bytes.fromhex("89504E470D0A1A0A0000000D4948445200000001000000010802000000907753DE0000000C49444154789C63606060000000040001F61738550000000049454E44AE426082")
+(assets/"logo.png").write_bytes(png)
+
+zip_path="/mnt/data/FunRun-Wanayasa-2026-GitHub-Ready-v2.zip"
+with ZipFile(zip_path,"w") as z:
+for f in base.rglob("*"):
+z.write(f, f.relative_to(base))
+
+print(zip_path)
